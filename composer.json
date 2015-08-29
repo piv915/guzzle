@@ -1,5 +1,5 @@
 {
-    "name": "guzzlehttp/guzzle",
+    "name": "piv915/guzzle",
     "type": "library",
     "description": "Guzzle is a PHP HTTP client library",
     "keywords": ["framework", "http", "rest", "web service", "curl", "client", "HTTP client"],
@@ -13,9 +13,9 @@
         }
     ],
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=5.4.0",
         "guzzlehttp/psr7": "~1.1",
-        "guzzlehttp/promises": "~1.0"
+        "piv915/promises": "dev-master"
     },
     "require-dev": {
         "ext-curl": "*",
@@ -31,11 +31,6 @@
     "autoload-dev": {
         "psr-4": {
             "GuzzleHttp\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "6.0-dev"
         }
     }
 }

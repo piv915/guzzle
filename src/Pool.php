@@ -51,22 +51,22 @@ class Pool implements PromisorInterface
         }
 
         $iterable = \GuzzleHttp\Promise\iter_for($requests);
-        $requests = function () use ($iterable, $client, $opts) {
-            foreach ($iterable as $rfn) {
-                if ($rfn instanceof RequestInterface) {
-                    yield $client->sendAsync($rfn, $opts);
-                } elseif (is_callable($rfn)) {
-                    yield $rfn($opts);
-                } else {
-                    throw new \InvalidArgumentException('Each value yielded by '
-                        . 'the iterator must be a Psr7\Http\Message\RequestInterface '
-                        . 'or a callable that returns a promise that fulfills '
-                        . 'with a Psr7\Message\Http\ResponseInterface object.');
-                }
-            }
-        };
-
-        $this->each = new EachPromise($requests(), $config);
+//        $requests = function () use ($iterable, $client, $opts) {
+//            foreach ($iterable as $rfn) {
+//                if ($rfn instanceof RequestInterface) {
+//                    yield $client->sendAsync($rfn, $opts);
+//                } elseif (is_callable($rfn)) {
+//                    yield $rfn($opts);
+//                } else {
+//                    throw new \InvalidArgumentException('Each value yielded by '
+//                        . 'the iterator must be a Psr7\Http\Message\RequestInterface '
+//                        . 'or a callable that returns a promise that fulfills '
+//                        . 'with a Psr7\Message\Http\ResponseInterface object.');
+//                }
+//            }
+//        };
+        $requests = new RequestIterator($iterable, $client, $opts);
+        $this->each = new EachPromise($requests, $config);
     }
 
     public function promise()
